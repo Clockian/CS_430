@@ -12,11 +12,11 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Check if arg 1 is a 3 or 6
-	int magic_num;
+	int conversion_num;
 
-	magic_num = atoi(argv[1]);
+	conversion_num = atoi(argv[1]);
 
-	if(magic_num != 3 && magic_num != 6) {
+	if (conversion_num != 3 && conversion_num != 6) {
 		printf("Usage: Choose between '3' for P3 or '6' for P6\n");
 		return 1;
 	} else {
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 	// 	without comparing everything in each other
 	// 	-No negative "-" at the beginning  ### Scratch, if it works, who cares
 	FILE *fr = fopen(argv[2], "r");
-	if(fr == NULL) {
+	if (fr == NULL) {
 		printf("Input file does not exist\n");
 		return 1;
 	} else {
@@ -44,7 +44,18 @@ int main(int argc, char *argv[]) {
 	char magicnum2 = fgetc(fr);
 	char newline = fgetc(fr);
 	printf("%c%c%c", magicnum1, magicnum2, newline);
-
+	
+	if (magicnum1 == 'P' && magicnum2 == '3' && conversion_num == 3) {
+		printf("Error: Cannot convert file to P3 as file is already P3\n");
+	} else if (magicnum1 == 'P' && magicnum2 == '3' && conversion_num == 6) {
+		printf("Run P3 to P6 conversion function\n");
+	} else if (magicnum1 == 'P' && magicnum2 == '6' && conversion_num == 3) {
+		printf("Run P6 to P3 conversion function\n");
+	} else if (magicnum1 == 'P' && magicnum2 == '6' && conversion_num == 6) {
+		printf("Error: Cannot convert file from P6 to P6\n");
+	} else {
+		printf("Error: invalid file header\n");
+	}
 	
 	// Read input file into memory, else it can't be read from
 	
