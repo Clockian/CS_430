@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 
 int main(int argc, char *argv[]) {
 
@@ -47,24 +48,80 @@ int main(int argc, char *argv[]) {
 	
 	if (magicnum1 == 'P' && magicnum2 == '3' && conversion_num == 3) {
 		printf("Error: Cannot convert file to P3 as file is already P3\n");
+		return 1;
 	} else if (magicnum1 == 'P' && magicnum2 == '3' && conversion_num == 6) {
 		printf("Run P3 to P6 conversion function\n");
 	} else if (magicnum1 == 'P' && magicnum2 == '6' && conversion_num == 3) {
 		printf("Run P6 to P3 conversion function\n");
 	} else if (magicnum1 == 'P' && magicnum2 == '6' && conversion_num == 6) {
 		printf("Error: Cannot convert file from P6 to P6\n");
+		return 1;
 	} else {
 		printf("Error: invalid file header\n");
+		return 1;
 	}
 	
-	// Read input file into memory, else it can't be read from
-	
-
 	// Skip any comments "#" to get the "HEIGHT WIDTH"
+	char next_char = fgetc(fr);
+	while (1) {
+		if (next_char == '#') {
+			while (next_char != '\n') {
+				next_char = fgetc(fr);
+				//printf("in innner while loop\n");
+			}
+			//printf("skipping commented line\n");
+		} else {
+			//printf("breaking from loop\n");
+			break;
+		}
+	}
+	printf("Made it past while loop\n");
+	char size_data[50];
+	char temp[50];
+	char temp2[50];
+	// clears memory of what might have previously been there
+	for (int y = 0; y < 50; y += 1) {
+		size_data[y] = ' ';
+		temp[y] = ' ';
+		temp2[y] = ' ';
+	} 
+
+	fgets(size_data, 50, fr);
+	// prints what is in array for verification purposes
+	//for (int x = 0; x < 50; x += 1) {
+	//	printf("%c", size_data[x]);
+	//}
+	//printf("\n");
 	
+	char num;
+	
+	// copy's first number from input to separate array to be converted to int
+	int iterate = 0;
+	while (size_data[iterate] != ' ') {
+		temp[iterate] = size_data[iterate];
+		iterate += 1;
+	}
+
+	int WIDTH = atoi(temp);
+	
+	// copies second num from input to separate array to be converted to int
+	int iterate2 = iterate + 1;
+	while (size_data[iterate2] != '\n' && size_data[iterate2] != ' ') {
+		//printf("%c is what is in size_data\n", size_data[iterate2]);
+		temp2[iterate2] = size_data[iterate2];
+		iterate2 += 1;
+	}
+
+	int HEIGHT = atoi(temp2);
+
+	printf("Width - %d, Height - %d\n", WIDTH, HEIGHT);
+
 
 	// Skip any comment "#" to get the RGB max color value
 	
+
+	// Read input file into memory, else it can't be read from
+
 
 	// If converting from P3 to P6, change the ASCII decimal to binary
 	
