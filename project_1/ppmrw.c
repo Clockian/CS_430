@@ -79,11 +79,13 @@ int main(int argc, char *argv[]) {
 	char size_data[50];
 	char temp[50];
 	char temp2[50];
+	char rgb_data[50];
 	// clears memory of what might have previously been there
 	for (int y = 0; y < 50; y += 1) {
 		size_data[y] = ' ';
 		temp[y] = ' ';
 		temp2[y] = ' ';
+		rgb_data[y] = ' ';
 	} 
 
 	fgets(size_data, 50, fr);
@@ -114,11 +116,30 @@ int main(int argc, char *argv[]) {
 
 	int HEIGHT = atoi(temp2);
 
-	printf("Width - %d, Height - %d\n", WIDTH, HEIGHT);
+	printf("Width -> %d, Height -> %d\n", WIDTH, HEIGHT);
+
+	printf("next_char, before = %c\n", next_char);
 
 
 	// Skip any comment "#" to get the RGB max color value
-	
+	char next_char_array[50];
+	fgets(next_char_array, 49, fr);
+	while (1) {
+		if (next_char_array[0] == '#') {
+			fgets(next_char_array, 49, fr);
+		} else {
+			break;
+		}
+	}
+
+	int RGB_color = atoi(next_char_array);
+	printf("RGB_color = %d", RGB_color);
+
+	// Error check on RGB value, can't compute anything by 255
+	if (RGB_color != 255) {
+		printf("Error: Only RGB 255 color supported");
+		return 1;
+	}
 
 	// Read input file into memory, else it can't be read from
 
