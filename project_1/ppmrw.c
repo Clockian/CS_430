@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <ctype.h>
+#include <string.h>
 
 int main(int argc, char *argv[]) {
 
@@ -155,14 +155,125 @@ int main(int argc, char *argv[]) {
 	printf("Output from memory begins\n");
 
 	for (int x = 0; x < 13; x +=1 ) {
-		printf("%c", *(memory + sizeof(char)*x));//temporary);//tempnum3);
+		printf("%c", *(memory + sizeof(char)*x));
 	}
 	printf("\n");
 
 	// If converting from P3 to P6, change the ASCII decimal to binary
+	char conv_char_int[4];
+	conv_char_int[0] = *(memory);
+	conv_char_int[1] = *(memory + sizeof(char));
+	conv_char_int[2] = *(memory + sizeof(char)*2);
+	conv_char_int[3] = *(memory + sizeof(char)*3);
+
+	int pixel_rgb = atoi(conv_char_int);
+	printf("%d\n", pixel_rgb);
 	
+	// Convert int to hex, then later concatone to offically declare hex
+	//int hex_remainder1;
+	//int hex_remainder2;
+	//hex_remainder1 = pixel_rgb % 16;
+	//pixel_rgb = pixel_rgb / 16;
+	//hex_remainder2 = pixel_rgb % 16;
+
+	//printf("%d, %d\n", hex_remainder1, hex_remainder2);
+	//char holding_hex[2];
+	//sprintf(holding_hex, "%x", pixel_rgb);
+	//for(int x =0; x<2;x++){
+	//	printf("%c", holding_hex[x]);
+	//}
+	//printf("\n");
+	
+	//holding_hex[3] = holding_hex[1];
+	//holding_hex[2] = holding_hex[0];
+	//holding_hex[1] = 'x';
+	//holding_hex[0] = '\\';
+
+	//for(int x =0; x<4;x++){
+	//	printf("%c", holding_hex[x]);
+	//}
+	//printf("\n");
+
+/*	char *hex2;
+	if (hex_remainder2 < 10) {
+		*hex2 = hex_remainder2 + '0';
+	} else if (hex_remainder2 == 10) {
+		*hex2 = 'a';
+	} else if (hex_remainder2 == 11) {
+		*hex2 = 'b';
+	} else if (hex_remainder2 == 12) {
+		*hex2 = 'c';
+	} else if (hex_remainder2 == 13) {
+		*hex2 = 'd';
+	} else if (hex_remainder2 == 14) {
+		*hex2 = 'e';
+	} else if (hex_remainder2 == 15) {
+		*hex2 = 'f';
+	}
+
+
+	char *hex1;
+	if (hex_remainder1 < 10) {
+		*hex1 = hex_remainder1 + '0';
+	} else if (hex_remainder1 == 10) {
+		*hex1 = 'a';
+	} else if (hex_remainder1 == 11) {
+		*hex1 = 'b';
+	} else if (hex_remainder1 == 12) {
+		*hex1 = 'c';
+	} else if (hex_remainder1 == 13) {
+		*hex1 = 'd';
+	} else if (hex_remainder1 == 14) {
+		*hex1 = 'e';
+	} else if (hex_remainder1 == 15) {
+		*hex1 = 'f';
+	}
+*/
+	//printf("%c\n", hex1);
+	
+	// Concatonate both hex chars together with \x
+	//char *hex22 = (char)hex2;
+	//char *hex11 = (char)hex1;
+	
+//	char *init = "\x%s", holding_hex;
+	//char *concatonate;
+	//concatonate = malloc(sizeof(char) * 4);
+	//strcpy(concatonate, "\x");
+
+	//char binary_rgb[8];
+	//for(int x = 7; x != 0; x--) {
+	//	if(pixel_rgb % 2 == 0){
+	//		binary_rgb[x] = '0';
+	//	} else {
+	//		binary_rgb[x] = '1';
+	//	}
+	//	pixel_rgb = pixel_rgb/2;
+	//}
+	//printf("Binary = ");
+	//for(int x = 0; x < 8; x++){
+	//	printf("%c", binary_rgb[x]);
+		//printf("here");
+	//}
+	//printf("\n");
+
+	FILE *fw;
+	fw = fopen(argv[3], "w");
+
+	//unsigned char testing_raw = 'fc';
+	char *s = "\xfc";
+
+	//for (int x = 0; x < 8; x++) {
+	fprintf(fw, "%c", *s);//binary_rgb[x]);
+	//}
+	
+
+	//fprintf(fw, "%x", pixel_rgb);
+	
+	fclose(fw);
+
+	//char binary_rgb[8];
+	//itoa(pixel_rgb, binary_rgb, 2);
+	//printf("Binary = %s\n", binary_rgb);
 
 	// If converting from P6 to P3, convert the binary to ASCII decimal
-	
-
 }
