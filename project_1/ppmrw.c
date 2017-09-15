@@ -118,7 +118,7 @@ int main(int argc, char *argv[]) {
 
 	printf("Width -> %d, Height -> %d\n", WIDTH, HEIGHT);
 
-	printf("next_char, before = %c\n", next_char);
+	//printf("next_char, before = %c\n", next_char);
 
 
 	// Skip any comment "#" to get the RGB max color value
@@ -133,16 +133,31 @@ int main(int argc, char *argv[]) {
 	}
 
 	int RGB_color = atoi(next_char_array);
-	printf("RGB_color = %d", RGB_color);
+	printf("RGB_color = %d\n", RGB_color);
 
-	// Error check on RGB value, can't compute anything by 255
+	// Error check on RGB value, can't compute anything but 255
 	if (RGB_color != 255) {
-		printf("Error: Only RGB 255 color supported");
+		printf("Error: Only RGB 255 color supported\n");
 		return 1;
 	}
 
 	// Read input file into memory, else it can't be read from
+	char *memory;
+	memory = malloc(sizeof(char) * WIDTH * HEIGHT * 3);
+	long cur = ftell(fr);
+	fseek(fr, 0, SEEK_END);
+	long size = ftell(fr);
+	fseek(fr,cur, SEEK_SET);
 
+	fread(memory, size, 1, fr);
+	fclose(fr);
+	
+	printf("Output from memory begins\n");
+
+	for (int x = 0; x < 13; x +=1 ) {
+		printf("%c", *(memory + sizeof(char)*x));//temporary);//tempnum3);
+	}
+	printf("\n");
 
 	// If converting from P3 to P6, change the ASCII decimal to binary
 	
