@@ -43,3 +43,19 @@ For interpreting the P6 files:
 The binary values are a single line containing all of the values, with each group of 8 bits representing the hex value of a portion color of the pixel. Each 24 bits represent the RGB color of a single pixel. Below is an example of how this looks, but there are no spaces in the actual file.
 
     11111111 11111111 11111111
+
+<b>Known Issues</b>
+The following are unresolved issues with the program
++ Unable to construct new meta data for output
++ Unable to convert a P3 or P6 .ppm image file to P3
++ Unable to convert a P3 or P6 .ppm image file to P6
+
+As for the conversion of the image file, I was only able to convert a single RGB int value to binary, which was achieved by manually typing in it's hex equivalent to a string that forced the hex value into a single int. I was unable to discover an alternative method to doing this or finding a pipeline that would work with the solution I did discover.
+
+<b>Description of Files</b>
++ ppmrw.c - main program file
++ README.md - general information regarding project
++ input1A.ppm - a test P3 ppm file consisting of a single pixel with the color values of (252,252,252)
++ input1R.ppm - a test P6 ppm file consisting of a single pixel
++ output.ppm - the output I was able to create for this project, consisting of a single R value of RBG, truly converted to binary
++ makefile - the file used to compile the program
