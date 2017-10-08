@@ -1,5 +1,5 @@
-all: raycast.c 3Dmath.h
-	gcc raycast.c -o raycast
+all: raycast.c math3D.c math3D.h
+	gcc raycast.c math3D.c -o raycast
 
 clean:
 	rm -rf raycast *~

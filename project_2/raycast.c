@@ -1,8 +1,12 @@
 //begining of project
 #include <stdlib.h>
 #include <stdio.h>
+#include "math3D.h"
+#include "parser.h"
+
 int main(){
-	printf("this renders");
+	printf("this renders\n");
+	
 }
 /*
 // Create function render(depends on whether or not you use global vars)
@@ -67,50 +71,13 @@ void Raycast(Ro, Rd){
 	return closet_obj.color;
 }
 
-// Parser CSV
-// Take in by line and break up, or accept term by term. Problably latter
-
-// Have one for plane, sphere, camera
-// Poor man's polymorphism
-// Cheat, put everything into one struct
-
-typedef struct{
-	int kind;
-	position;
-	color;
-	double radius;
-	//plane
-	normal;
-	camera;
-	width;
-	height;
-}
-
-// problably need obj as parameter
-parse_type(...){
-	// read till you get a comma
-	//if string is == to strcmp(str, "camera"{
-	//	obj -> kind = camera;
-	//}
-	//... each type
-	//
-
-parse_field(..., obj){
-	// Read till colon
-	// ster = read until colon
-	// if strcmp(str, "position")
-	// parse_position;
-	// ... each field type
-	//}
-	//
-
-parse_radius(...obj){
-	// skip_ws(); skip whitespace
-	// fscanf("%"..., &value);
-	// obj-radius = value;
-	// for each of the field types
-	//
-}
-*/
 // Objects* objects or scene
 // int object_counts;
+*/
+
+/* Garbage test code
+	V3 c = {0, 0, 0};
+	V3 a = {1, 2, 3};
+	V3 b = {1, 2, 3};
+	c = V3_add(c, a, b);
+	printf("c.V0 -> %f, c.V1 -> %f, c.V2 -> %f\n", c.V0, c.V1, c.V2);
