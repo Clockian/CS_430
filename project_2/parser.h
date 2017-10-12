@@ -12,10 +12,25 @@ typedef struct{
 	double cam_height;
 }scene_object;
 
-scene_object parse_type(scene_object obj, char *argv[]);
+char * remove_brackets_whitespace(char *str);
 
-scene_object parse_field(scene_object obj);
+char * parse(char *str);
 
-scene_object parse_field(scene_object obj);
+char * cut_string(char *str);
+
+scene_object * determine_type(char *str);
+
+scene_object * parse_camera(char *str);
+
+scene_object * parse_sphere(char *str);
+
+scene_object * parse_plane(char *str);
+
+scene_object parse_radius_width_height(scene_object obj, char *str);
+
+scene_object parse_color_position_normal(scene_object obj);
+
+//scene_object ** read_csv_file(FILE *fr);
+void read_csv_file(FILE *fr, scene_object result[]);
 
 #endif /* PARSER_H */

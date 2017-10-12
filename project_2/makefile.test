@@ -1,0 +1,5 @@
+all: test_parser.c parser.c parser.h
+	gcc test_parser.c parser.c -o test
+
+clean:
+	rm -rf test *~

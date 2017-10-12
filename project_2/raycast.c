@@ -4,13 +4,8 @@
 #include "math3D.h"
 #include "parser.h"
 
-int main(){
-	printf("this renders\n");
-	
-}
-/*
 // Create function render(depends on whether or not you use global vars)
-pixel*  render(){
+pixel * render(){
 	Pixel *pixels = malloc(sizeof(double) * 3);
 	for(int i = 0; i < width; i += 1){  // i from the Pij
 		for(int j = 0; j < height; j += 1){
@@ -75,9 +70,14 @@ void Raycast(Ro, Rd){
 // int object_counts;
 */
 
+int main(int argc, char *argv[]){
+	printf("this works, raytracer\n");
+}
 /* Garbage test code
 	V3 c = {0, 0, 0};
 	V3 a = {1, 2, 3};
 	V3 b = {1, 2, 3};
 	c = V3_add(c, a, b);
 	printf("c.V0 -> %f, c.V1 -> %f, c.V2 -> %f\n", c.V0, c.V1, c.V2);
+
+*/

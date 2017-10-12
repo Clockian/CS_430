@@ -1,5 +1,5 @@
-all: raycast.c math3D.c math3D.h
-	gcc raycast.c math3D.c -o raycast
+ray:
+	make -f makefile.raytracer
 
-clean:
-	rm -rf raycast *~
+test:
+	make -f makefile.test
