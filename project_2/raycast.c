@@ -5,7 +5,7 @@
 #include "parser.h"
 
 // Create function render(depends on whether or not you use global vars)
-pixel * render(){
+/*pixel * render(){
 	Pixel *pixels = malloc(sizeof(double) * 3);
 	for(int i = 0; i < width; i += 1){  // i from the Pij
 		for(int j = 0; j < height; j += 1){
@@ -33,9 +33,9 @@ pixel * render(){
 			pixels[...] = color.blue;
 		}
 	}
-}
+}*/
 
-void Raycast(Ro, Rd){
+/*void Raycast(Ro, Rd){
 	cloest_obj = NULL;
 	closet_t = 10000; //infinity, set to very large number
 
@@ -64,14 +64,13 @@ void Raycast(Ro, Rd){
 
 	// Passes back last color, need to pass first color, which above achieves?
 	return closet_obj.color;
-}
+}*/
 
 // Objects* objects or scene
 // int object_counts;
-*/
 
 int main(int argc, char *argv[]){
-	printf("this works, raytracer\n");
+	printf("This doesn't work, raytracer\n");
 }
 /* Garbage test code
 	V3 c = {0, 0, 0};
