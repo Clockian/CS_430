@@ -66,7 +66,7 @@ pixel * render(int width, int height){
 	pixel *Pijz = malloc(sizeof(pixel));
 	pixel *Rd = malloc(sizeof(pixel));
 	//pixel *pixels = malloc(sizeof(pixel));
-	
+
 	for(int i = 0; i < width; i++){  // i from the Pij
 		for(int j = 0; j < height; j++){
 
@@ -87,7 +87,7 @@ pixel * render(int width, int height){
 	}
 }
 
-void Raycast(Ro, Rd){
+void Raycast(){//Ro, Rd){
 	/*cloest_obj = NULL;
 	closet_t = 10000; //infinity, set to very large number
 

@@ -19,4 +19,8 @@ pixel * construct_ray_direction(pixel *Pijz);
 
 pixel * normalize_ray(pixel *Rd);
 
+pixel * render(int width, int height);
+
+void Raycast();
+
 #endif /* RAYCAST_H */

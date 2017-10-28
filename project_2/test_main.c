@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "test_parser.h"
 #include "test_raycast.h"
+#include "test_writer.h"
 
 int main(){
 	test_remove_brackets_whitespace();
@@ -22,6 +23,10 @@ int main(){
 	test_construct_pixel_i_j_z();
 	test_construct_ray_direction();
 	test_normalize_ray();
+
+	printf("\n");
+
+	test_write_P6();
 
 	return 0;
 }
