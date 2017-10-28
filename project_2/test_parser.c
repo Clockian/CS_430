@@ -3,7 +3,7 @@
 #include <string.h>
 #include "parser.h"
 
-void test_remove_brackets_whitespace(){
+void test_remove_brackets_whitespace(void){
 	char *test_str = "sphere, color: [1.0, 0, 0], position: [0, 2, 5], radius: 2";
 	char *test_result = "sphere,color:1.0,0,0,position:0,2,5,radius:2";
 	
@@ -16,7 +16,7 @@ void test_remove_brackets_whitespace(){
 	}
 }
 
-void test_parse(){
+void test_parse(void){
 	char *test_str1 = "sphere,color:1.0,0,0,position:0,2,5,radius:2";
 	char *test_str2 = "color:1.0,0,0,position:0,2,5,radius:2";
 	char *test_str3 = "2";
@@ -37,7 +37,7 @@ void test_parse(){
 	}
 }
 
-void test_cut_string(){
+void test_cut_string(void){
 	char *test_str1 = "sphere,color:1.0,0,0,position:0,2,5,radius:2";
 	char *test_result1 = "color:1.0,0,0,position:0,2,5,radius:2";
 	char *test_str2 = "color:1.0,0,0,position:0,2,5,radius:2";
@@ -58,7 +58,7 @@ void test_cut_string(){
 	}
 }
 
-void test_determine_type(){
+void test_determine_type(void){
 	char *test_str = "camera,width:0.5,height:0.5";
 	
 	scene_object *test_obj;
@@ -78,7 +78,7 @@ void test_determine_type(){
 	}
 }
 
-void test_parse_camera(){
+void test_parse_camera(void){
 	char *test_str = "width:0.5,height:0.5";
 	
 	scene_object *test_obj;
@@ -98,7 +98,7 @@ void test_parse_camera(){
 	}
 }
 
-void test_parse_sphere(){
+void test_parse_sphere(void){
 	char *test_str = "color:1.0,0,0,position:0,2,5,radius:2";
 	
 	scene_object *test_obj;
@@ -128,7 +128,7 @@ void test_parse_sphere(){
 	}
 }
 
-void test_parse_plane(){
+void test_parse_plane(void){
 	char *test_str = "color:0,0,1.0,position:0,0,0,normal:0,1,0";
 	
 	scene_object *test_obj;
@@ -162,7 +162,7 @@ void test_parse_plane(){
 	}
 }
 
-void test_read_csv_file(){
+void test_read_csv_file(void){
 	scene_object result[4];
 	FILE *fr = fopen("input.csv", "r");
 	read_csv_file(fr, result);
@@ -187,21 +187,8 @@ void test_read_csv_file(){
 	   result[2].normal[0] == 0 &&
 	   result[2].normal[1] == 1 &&
 	   result[2].normal[2] == 0){
-		printf("SUCCESS - test_test_read_csv_file\n");
+		printf("SUCCESS - test_read_csv_file\n");
 	} else {
-		printf("FAILED  - test_test_read_csv_file\n");
+		printf("FAILED  - test_read_csv_file\n");
 	}
-}
-
-int main(){
-	test_remove_brackets_whitespace();
-	test_parse();
-	test_cut_string();
-	test_determine_type();
-	test_parse_camera();
-	test_parse_sphere();
-	test_parse_plane();
-	test_read_csv_file();
-
-	return 0;
 }

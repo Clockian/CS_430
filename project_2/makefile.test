@@ -1,5 +1,5 @@
-all: test_parser.c parser.c parser.h
-	gcc test_parser.c parser.c -o test
+all: test_main.c test_raycast.c raycast.c test_parser.c parser.c test_raycast.h test_parser.h parser.h
+	gcc test_main.c test_raycast.c raycast.c test_parser.c parser.c -o test -lm
 
 clean:
 	rm -rf test *~
