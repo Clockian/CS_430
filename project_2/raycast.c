@@ -1,8 +1,6 @@
-//begining of project
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "math3D.h"
 #include "parser.h"
 #include "raycast.h"
 

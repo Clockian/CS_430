@@ -7,7 +7,7 @@ Jasque Saydyk - jrsaydyk@gmail.com
 The purpose of this program is to create a functioning raycaster. This raycaster will have the following components:
 + Parser - to read the contents of a CSV file, then put that data into a usable data structure
 + Raycast - using the data, creates the scene and "takes the picture"
-+ Store - store the "picture" as a P3 .ppm file
++ Writer - stores the "picture" as a P6 .ppm file
 
 <b>Usage</b>
 
@@ -35,26 +35,34 @@ The test code can be ran with the following argument in the terminal
 
 <pre><code>./test</code></pre>
 
-The test code is primarily unit tests on the functions created for this project
+The test code is primarily unit tests on the functions to ensure they work. They do not test for incorrect input or program misusage as of yet.
 
 <b>Known Issues</b>
 
 The following are unresolved issues with the program
 
 + Raycast.c incomplete, doesn't produce the image of the scene
-+ Program doesn't store the image as a .ppm
 
-This project has made me realize that I am remarkably bad with C, as it took me the past week and a half to get the parser functioning correctly, and before that I burnt alot of time re-exploring how a raycaster functions so I could get an idea to complete the project.
+Raycast.c has implemented the obtaining of Rd and normalizing it, but the intersection test and obtaining the color data has yet to be implemented.
+
+This project will be updated on the Github until it is completed
 
 <b>Description of Files</b>
-+ raycast.c - Main program file
++ raytracer.c - Main program file
++ raycast.c - Has functions necessary for the for the raycasting.
 + parser.c - Converts each line from a compatible .csv file into a struct containing the data for the file, and those structs are stored in an array, which is used by the main program file
-+ parser.h - Header file for parser.c, defines the struct the data uses
-+ math3D.c - Contains vector math functions, because I was unable to figure out static inline functions
-+ math3D.h - Contains the struct for a vector
++ writer.c - Writes a given file to disk as a P6 .ppm
++ raycast.h - Defines the struct for a vector, misnamed as pixel
++ parser.h - Defines the struct the data uses
++ writer.h - Defines the struct for the color of a pixel, named Pixel
 + README.md - Readme file describing the project
-+ test_parser.c - The tests for the program, only tests parser.c at the moment
 + makefile - Interpets the two different compilation methods for the program
 + makefile.raytracer - Specifies the compilation for the raycaster
 + makefile.test - Specifies the compilation for the test
 + input.csv - The example .csv input provided with the project
+
+
++ test_main.c - The main file that runs all of the tests. Tests simply produce a print statement stating pass or fail
++ test_raycast.c - The unit tests for the raycaster
++ test_parser.c - The unit tests for the parser
++ test_writer.c - The unit test for the writer, produces checkerboard image that needs to be checked visually
