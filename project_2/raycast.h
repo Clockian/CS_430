@@ -3,23 +3,23 @@
 
 typedef struct{
 	double i, j, z;
-}pixel;
+}V3;
 
 double construct_aspect_ratio(int width, int height);
 
-double construct_pixel_i(int i, int width, int height);
+double construct_V3_i(int i, int width, int height);
 
-double construct_pixel_j(int j, int height);
+double construct_V3_j(int j, int height);
 
-double construct_pixel_z(void);
+double construct_V3_z(void);
 
-pixel * construct_pixel_i_j_z(int i, int j, int width, int height);
+V3 * construct_V3_i_j_z(int i, int j, int width, int height);
 
-pixel * construct_ray_direction(pixel *Pijz);
+V3 * construct_ray_direction(V3 *Pijz);
 
-pixel * normalize_ray(pixel *Rd);
+V3 * normalize_ray(V3 *Rd);
 
-pixel * render(int width, int height);
+V3 * render(int width, int height);
 
 void Raycast();
 

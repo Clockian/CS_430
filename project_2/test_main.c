@@ -17,10 +17,10 @@ int main(){
 	printf("\n");
 
 	test_construct_aspect_ratio();
-	test_construct_pixel_i();
-	test_construct_pixel_j();
-	test_construct_pixel_z();
-	test_construct_pixel_i_j_z();
+	test_construct_V3_i();
+	test_construct_V3_j();
+	test_construct_V3_z();
+	test_construct_V3_i_j_z();
 	test_construct_ray_direction();
 	test_normalize_ray();
 

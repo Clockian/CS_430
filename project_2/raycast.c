@@ -9,35 +9,35 @@ double construct_aspect_ratio(int width, int height){
 	return aspect_ratio;
 }
 
-double construct_pixel_i(int i, int width, int height){
+double construct_V3_i(int i, int width, int height){
 	double Pi = ((double) i / ((double) width * 0.5)) - 1;
 	Pi = Pi / construct_aspect_ratio(width, height);
 	return Pi;
 }
 
-double construct_pixel_j(int j, int height){
+double construct_V3_j(int j, int height){
 	double Pj = 1 - ((double) j / ((double) height * 0.5));
 	return Pj;
 }
 
 // IDK, Z axis seems like it shouldn't be this, but some tan formula... idk
-double construct_pixel_z(void){
+double construct_V3_z(void){
 	double Pz = -1;
 	return Pz;
 }
 
-pixel * construct_pixel_i_j_z(int i, int j, int width, int height){
-	pixel *Pijz = malloc(sizeof(pixel));
+V3 * construct_V3_i_j_z(int i, int j, int width, int height){
+	V3 *Pijz = malloc(sizeof(V3));
 	
-	Pijz->i = construct_pixel_i(i, width, height);
-	Pijz->j = construct_pixel_j(j, height);
-	Pijz->z = construct_pixel_z();
+	Pijz->i = construct_V3_i(i, width, height);
+	Pijz->j = construct_V3_j(j, height);
+	Pijz->z = construct_V3_z();
 
 	return Pijz;
 }
 
-pixel * construct_ray_direction(pixel *Pijz){
-	pixel *Rd = malloc(sizeof(pixel));
+V3 * construct_ray_direction(V3 *Pijz){
+	V3 *Rd = malloc(sizeof(V3));
 
 	Rd->i = Pijz->i - 0;
 	Rd->j = Pijz->j - 0;
@@ -46,8 +46,8 @@ pixel * construct_ray_direction(pixel *Pijz){
 	return Rd;
 }
 
-pixel * normalize_ray(pixel *Rd){
-	pixel *normalized_Rd = malloc(sizeof(pixel));
+V3 * normalize_ray(V3 *Rd){
+	V3 *normalized_Rd = malloc(sizeof(V3));
 
 	double Rd_magnitude = sqrt((Rd->i * Rd->i) + (Rd->j * Rd->j) + (Rd->z * Rd->z));
 
@@ -58,17 +58,21 @@ pixel * normalize_ray(pixel *Rd){
 	return normalized_Rd;
 }
 
+//intersection(){
+
+//}
+
 // Create function render(depends on whether or not you use global vars)
-pixel * render(int width, int height){
+V3 * render(int width, int height){
 	
-	pixel *Pijz = malloc(sizeof(pixel));
-	pixel *Rd = malloc(sizeof(pixel));
+	V3 *Pijz = malloc(sizeof(V3));
+	V3 *Rd = malloc(sizeof(V3));
 	//pixel *pixels = malloc(sizeof(pixel));
 
 	for(int i = 0; i < width; i++){  // i from the Pij
 		for(int j = 0; j < height; j++){
 
-			Pijz = construct_pixel_i_j_z(i, j, width, height);
+			Pijz = construct_V3_i_j_z(i, j, width, height);
 
 			Rd = construct_ray_direction(Pijz);
 
@@ -79,7 +83,7 @@ pixel * render(int width, int height){
 
 			// Colors in ray tracers go from 0-1, RGB is 1-255, need conversion
 			//pixels[...] = color.red;
-			//pixels[...] = color.green;
+			//pixles[...] = color.green;
 			//pixels[...] = color.blue;
 		}
 	}

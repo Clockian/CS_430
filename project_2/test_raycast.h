@@ -3,13 +3,13 @@
 
 void test_construct_aspect_ratio(void);
 
-void test_construct_pixel_i(void);
+void test_construct_V3_i(void);
 
-void test_construct_pixel_j(void);
+void test_construct_V3_j(void);
 
-void test_construct_pixel_z(void);
+void test_construct_V3_z(void);
 
-void test_construct_pixel_i_j_z(void);
+void test_construct_V3_i_j_z(void);
 
 void test_construct_ray_direction(void);
 
