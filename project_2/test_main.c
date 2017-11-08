@@ -23,6 +23,7 @@ int main(){
 	test_construct_V3_i_j_z();
 	test_construct_ray_direction();
 	test_normalize_ray();
+	test_sphere_intersection();
 
 	printf("\n");
 

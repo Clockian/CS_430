@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "raycast.h"
+#include "parser.h"
 
 void test_construct_aspect_ratio(void){
 	double ratio1 = construct_aspect_ratio(640, 480);
@@ -123,5 +124,46 @@ void test_normalize_ray(void){
 		printf("SUCCESS - test_normalize_ray\n");
 	} else{
 		printf("FAILED - test_normalize_ray\n");
+	}
+}
+
+void test_sphere_intersection(void){
+	scene_object sphere;
+	sphere.color[0] = 1.0;
+	sphere.color[1] = 0;
+	sphere.color[2] = 0;
+	sphere.position[0] = 0;
+	sphere.position[1] = 2;
+	sphere.position[2] = 5;
+	sphere.radius = 2;
+
+	V3 Vd1;
+	Vd1.i = -0.468521;
+	Vd1.j = 0.624696;
+	Vd1.z = -0.624695;
+
+	V3 Vd2;
+	Vd1.i = 0.0;
+	Vd1.j = 0.0;
+	Vd1.z = -0.624695;
+
+	Pixel *output1 = sphere_intersection(Vd1, sphere);
+	Pixel *output2 = sphere_intersection(Vd2, sphere);
+
+	int temp_val1 = 0;
+	int temp_val2 = 255;
+
+	unsigned char value1 = *((unsigned char *)&temp_val1);
+	unsigned char value2 = *((unsigned char *)&temp_val2);
+
+	if(output1->r == value1 &&
+	   output1->g == value1 &&
+	   output1->b == value1 &&
+	   output2->r == value2 &&
+	   output2->g == value1 &&
+	   output2->b == value1 ){
+		printf("SUCCESS - test_sphere_intersection\n");
+	} else{
+		printf("FAILED - test_sphere_intersection\n");
 	}
 }

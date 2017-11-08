@@ -1,6 +1,9 @@
 #ifndef RAYCAST_H
 #define RAYCAST_H
 
+#include "parser.h"
+#include "writer.h"
+
 typedef struct{
 	double i, j, z;
 }V3;
@@ -18,6 +21,8 @@ V3 * construct_V3_i_j_z(int i, int j, int width, int height);
 V3 * construct_ray_direction(V3 *Pijz);
 
 V3 * normalize_ray(V3 *Rd);
+
+Pixel * sphere_intersection(V3 Rd, scene_object sphere);
 
 V3 * render(int width, int height);
 

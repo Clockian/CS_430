@@ -58,12 +58,75 @@ V3 * normalize_ray(V3 *Rd){
 	return normalized_Rd;
 }
 
-//intersection(){
-
+//void double_to_byte(double d){
+//	return (byte)(d * 255);
 //}
 
+Pixel * sphere_intersection(V3 Rd, scene_object sphere){
+	double A = (Rd.i * Rd.i) + (Rd.j * Rd.j) + (Rd.z * Rd.z);
+	double B = 2 * (Rd.i * (0 - sphere.position[0]) + 
+		         Rd.j * (0 - sphere.position[1]) + 
+		         Rd.z * (0 - sphere.position[2]));
+	double C = ((Rd.i - sphere.position[0]) * (Rd.i - sphere.position[0]) +
+	            (Rd.j - sphere.position[1]) * (Rd.j - sphere.position[1]) +
+	            (Rd.z - sphere.position[2]) * (Rd.z - sphere.position[2]) -
+	            (sphere.radius * sphere.radius));
+
+	double discriminate = (B * B) - (4 * A * C);
+
+	double intersect;
+	double intersect_1;
+	double intersect_2;
+
+	int r;
+	int g;
+	int b;
+
+	Pixel *color = malloc(sizeof(Pixel));
+	
+	if(discriminate < 0){
+		//No intersection
+		r = 0;
+		g = 0;
+		b = 0;
+		color->r = *((unsigned char *)&r);
+		color->g = *((unsigned char *)&g);
+		color->b = *((unsigned char *)&b);
+		return color;
+	} else if(discriminate == 0){
+		// Single intersection
+		intersect = (-B) / (2 * A);
+	} else if(discriminate > 0){
+		intersect_1 = ((-B - sqrt((B * B) - (4 * A * C))) / (2 * A));
+		intersect_2 = ((-B + sqrt((B * B) - (4 * A * C))) / (2 * A));
+		if(intersect_1 >= 0 && intersect_1 < intersect_2){
+			intersect = intersect_1;
+		} else {
+			intersect = intersect_2;
+		}
+	} else{
+		printf("Error: sphere_intersection\n");
+	}
+
+	//Compute intersection
+	V3 Ri;
+	Ri.i = 0 + (Rd.i * intersect);
+	Ri.j = 0 + (Rd.j * intersect);
+	Ri.z = 0 + (Rd.z * intersect);
+
+	r = round(sphere.color[0] * 255);
+	g = round(sphere.color[1] * 255);
+	b = round(sphere.color[2] * 255);
+
+	color->r = *((unsigned char *)&r);
+	color->g = *((unsigned char *)&g);
+	color->b = *((unsigned char *)&b);
+
+	return color;
+}
+
 // Create function render(depends on whether or not you use global vars)
-V3 * render(int width, int height){
+V3 * render(int width, int height, scene_object obj){
 	
 	V3 *Pijz = malloc(sizeof(V3));
 	V3 *Rd = malloc(sizeof(V3));
@@ -79,7 +142,7 @@ V3 * render(int width, int height){
 			Rd = normalize_ray(Rd);
 
 			// Cast the ray
-			//color = raycast(Ro, Rd, ...);
+			color = raycast(Rd, obj);
 
 			// Colors in ray tracers go from 0-1, RGB is 1-255, need conversion
 			//pixels[...] = color.red;
