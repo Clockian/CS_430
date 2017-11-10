@@ -1,5 +1,5 @@
-all: raytracer.c raycast.c parser.c writer.c raycast.h parser.h writer.h
-	gcc raytracer.c raycast.c parser.c writer.c -o raycast -lm
+all: raytracer.c raycast.c parser.c writer.c math3D.c raycast.h parser.h writer.h math3D.h
+	gcc raytracer.c raycast.c parser.c writer.c math3D.c -o raycast -lm
 
 clean:
 	rm -rf raycast *~

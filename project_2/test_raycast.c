@@ -1,7 +1,8 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "raycast.h"
 #include "parser.h"
+//#include "writer.h"
 
 void test_construct_aspect_ratio(void){
 	double ratio1 = construct_aspect_ratio(640, 480);
@@ -127,14 +128,57 @@ void test_normalize_ray(void){
 	}
 }
 
+void test_plane_intersection(void){
+	// Angled down
+	V3 Rd1;
+	Rd1.i = -0.468521;
+	Rd1.j = 0.624696;
+	Rd1.z = -0.624695;
+
+	// Parallel
+	V3 Rd2;
+	Rd2.i = 0.0;
+	Rd2.j = 0.0;
+	Rd2.z = -0.624695;
+
+	// Angled up
+	V3 Rd3;
+	Rd3.i = 0.0;
+	Rd3.j = -0.4;
+	Rd3.z = -0.624695;
+
+	scene_object plane;
+	plane.color[0] = 0;
+	plane.color[1] = 0;
+	plane.color[2] = 1.0;
+	plane.position[0] = 0;
+	plane.position[1] = 0;
+	plane.position[2] = 0;
+	plane.normal[0] = 0;
+	plane.normal[1] = 1;
+	plane.normal[2] = 0;
+
+	double t1 = plane_intersection(Rd1, plane);
+	double t2 = plane_intersection(Rd2, plane);
+	double t3 = plane_intersection(Rd3, plane);
+
+	if(t1 >= 0.0 &&
+	   t2 == 0.0 &&
+	   t3 == 0.0 ){
+		printf("SUCCESS - test_plane_intersection\n");
+	} else{
+		printf("FAILED - test_plane_intersection\n");
+	}
+}
+
 void test_sphere_intersection(void){
 	scene_object sphere;
 	sphere.color[0] = 1.0;
 	sphere.color[1] = 0;
 	sphere.color[2] = 0;
 	sphere.position[0] = 0;
-	sphere.position[1] = 2;
-	sphere.position[2] = 5;
+	sphere.position[1] = 0;
+	sphere.position[2] = 4;
 	sphere.radius = 2;
 
 	V3 Vd1;
@@ -143,25 +187,17 @@ void test_sphere_intersection(void){
 	Vd1.z = -0.624695;
 
 	V3 Vd2;
-	Vd1.i = 0.0;
-	Vd1.j = 0.0;
-	Vd1.z = -0.624695;
+	Vd2.i = 0.0;
+	Vd2.j = 0.0;
+	Vd2.z = -0.624695;
 
-	Pixel *output1 = sphere_intersection(Vd1, sphere);
-	Pixel *output2 = sphere_intersection(Vd2, sphere);
+	double output1 = sphere_intersection(Vd1, sphere);
+	double output2 = sphere_intersection(Vd2, sphere);
 
-	int temp_val1 = 0;
-	int temp_val2 = 255;
+	printf("int - %f\n", output1);
+	printf("int - %f\n", output2);
 
-	unsigned char value1 = *((unsigned char *)&temp_val1);
-	unsigned char value2 = *((unsigned char *)&temp_val2);
-
-	if(output1->r == value1 &&
-	   output1->g == value1 &&
-	   output1->b == value1 &&
-	   output2->r == value2 &&
-	   output2->g == value1 &&
-	   output2->b == value1 ){
+	if(output1 == 0){
 		printf("SUCCESS - test_sphere_intersection\n");
 	} else{
 		printf("FAILED - test_sphere_intersection\n");

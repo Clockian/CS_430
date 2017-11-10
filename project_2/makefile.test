@@ -1,5 +1,5 @@
-all: test_main.c test_raycast.c test_writer.c test_parser.c raycast.c writer.c parser.c test_raycast.h test_writer.h test_parser.h raycast.h writer.h parser.h
-	gcc test_main.c test_raycast.c test_writer.c test_parser.c raycast.c writer.c parser.c -o test -lm
+all: test_main.c test_raycast.c test_writer.c test_parser.c raycast.c writer.c parser.c math3D.c test_raycast.h test_writer.h test_parser.h raycast.h writer.h parser.h math3D.h
+	gcc test_main.c test_raycast.c test_writer.c test_parser.c raycast.c writer.c parser.c math3D.c -o test -lm
 
 clean:
 	rm -rf test *~

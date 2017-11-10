@@ -1,34 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "math3D.h"
+
+//#include "math3D.h"
+#include "raycast.h"
 
 V3 V3_add(V3 c, V3 a, V3 b){
-	c.V0 = a.V0 + b.V0;
-	c.V1 = a.V1 + b.V1;
-	c.V2 = a.V2 + b.V2;
+	c.i = a.i + b.i;
+	c.j = a.j + b.j;
+	c.z = a.z + b.z;
 	return c;
 }
 
 void V3_subtract(V3 c, V3 a, V3 b){
-	c.V0 = a.V0 - b.V0;
-	c.V1 = a.V1 - b.V1;
-	c.V2 = a.V2 - b.V2;
+	c.i = a.i - b.i;
+	c.j = a.j - b.j;
+	c.z = a.z - b.z;
 }
 
-// Vector Scaling
 void V3_multiply(V3 c, V3 a, double b){
-	c.V0 = a.V0 * b;
-	c.V1 = a.V1 * b;
-	c.V2 = a.V2 * b;
+	c.i = a.i * b;
+	c.j = a.j * b;
+	c.z = a.z * b;
 }
 
-double V3_dot(V3 a, V3 b, double c){
-	c = a.V0 * b.V0 + a.V1 * b.V1 + a.V2 * b.V2;
+double V3_dot(V3 a, V3 b){
+	double c = a.i * b.i + a.j * b.j + a.z * b.z;
 	return c;
 }
 
-void V3_cross(V3 c, V3 a, V3 b){
-	c.V0 = a.V1 * b.V2 - a.V2 * b.V1;
-	c.V1 = a.V2 * b.V0 - a.V0 * b.V2;
-	c.V2 = a.V0 * b.V1 - a.V1 * b.V0;
+void V3_cross(V3 c, V3 a, V3 b) {
+	c.i = a.j * b.z - a.z * b.j;
+	c.j = a.z * b.i - a.i * b.z;
+	c.z = a.i * b.j - a.j * b.i;
 }

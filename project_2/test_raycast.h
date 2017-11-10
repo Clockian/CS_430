@@ -15,6 +15,8 @@ void test_construct_ray_direction(void);
 
 void test_normalize_ray(void);
 
+void test_plane_intersection(void);
+
 void test_sphere_intersection(void);
 
 #endif /* TEST_RAYCAST_H */
