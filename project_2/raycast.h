@@ -2,7 +2,7 @@
 #define RAYCAST_H
 
 #include "parser.h"
-//#include "writer.h"
+#include "writer.h"
 //#include "math3D.h"
 
 typedef struct{
@@ -23,12 +23,12 @@ V3 * construct_ray_direction(V3 *Pijz);
 
 V3 * normalize_ray(V3 *Rd);
 
-double plane_intersection(V3 Rd, scene_object obj);
+double plane_intersection(V3 *Rd, scene_object obj);
 
-double sphere_intersection(V3 Rd, scene_object obj);
+double sphere_intersection(V3 *Rd, scene_object obj);
 
-//Pixel * render(int width, int height, scene_object obj);
+Pixel * raycast(V3 *Rd, scene_object objects[], int obj_count);
 
-//Pixel * raycast(V3 Rd, scene_object objects[], int obj_count);
+Pixel * render(int width, int height, scene_object objects[], int obj_count);
 
 #endif /* RAYCAST_H */

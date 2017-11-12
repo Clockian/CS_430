@@ -130,23 +130,26 @@ void test_normalize_ray(void){
 
 void test_plane_intersection(void){
 	// Angled down
-	V3 Rd1;
-	Rd1.i = -0.468521;
-	Rd1.j = 0.624696;
-	Rd1.z = -0.624695;
+	//printf("here-4\n");
+	V3 *Rd1 = malloc(sizeof(V3));
+	Rd1->i = -0.468521;
+	Rd1->j = 0.624696;
+	Rd1->z = -0.624695;
 
 	// Parallel
-	V3 Rd2;
-	Rd2.i = 0.0;
-	Rd2.j = 0.0;
-	Rd2.z = -0.624695;
+	//printf("here-3\n");
+	V3 *Rd2 = malloc(sizeof(V3));
+	Rd2->i = 0.0;
+	Rd2->j = 0.0;
+	Rd2->z = -0.624695;
 
 	// Angled up
-	V3 Rd3;
-	Rd3.i = 0.0;
-	Rd3.j = -0.4;
-	Rd3.z = -0.624695;
-
+	//printf("here-2\n");
+	V3 *Rd3 = malloc(sizeof(V3));
+	Rd3->i = 0.0;
+	Rd3->j = -0.4;
+	Rd3->z = -0.624695;
+	//printf("here-1\n");
 	scene_object plane;
 	plane.color[0] = 0;
 	plane.color[1] = 0;
@@ -157,10 +160,13 @@ void test_plane_intersection(void){
 	plane.normal[0] = 0;
 	plane.normal[1] = 1;
 	plane.normal[2] = 0;
-
+	//printf("here\n");
 	double t1 = plane_intersection(Rd1, plane);
+	//printf("here1\n");
 	double t2 = plane_intersection(Rd2, plane);
+	//printf("here2\n");
 	double t3 = plane_intersection(Rd3, plane);
+	//printf("here3\n");
 
 	if(t1 >= 0.0 &&
 	   t2 == 0.0 &&
@@ -181,23 +187,25 @@ void test_sphere_intersection(void){
 	sphere.position[2] = 4;
 	sphere.radius = 2;
 
-	V3 Vd1;
-	Vd1.i = -0.468521;
-	Vd1.j = 0.624696;
-	Vd1.z = -0.624695;
+	V3 *Vd1 = malloc(sizeof(V3));
+	Vd1->i = -0.468521;
+	Vd1->j = 0.624696;
+	Vd1->z = -0.624695;
 
-	V3 Vd2;
-	Vd2.i = 0.0;
-	Vd2.j = 0.0;
-	Vd2.z = -0.624695;
+	V3 *Vd2 = malloc(sizeof(V3));
+	Vd2->i = 0.0;
+	Vd2->j = 0.00001;
+	Vd2->z = -0.424695;
 
 	double output1 = sphere_intersection(Vd1, sphere);
 	double output2 = sphere_intersection(Vd2, sphere);
 
-	printf("int - %f\n", output1);
-	printf("int - %f\n", output2);
+	//printf("int - %f\n", output1);
+	//printf("int - %f\n", output2);
 
-	if(output1 == 0){
+	if(output1 == -1 &&
+	   output2 >= -7.888786 &&
+	   output2 <= -7.888785){
 		printf("SUCCESS - test_sphere_intersection\n");
 	} else{
 		printf("FAILED - test_sphere_intersection\n");
