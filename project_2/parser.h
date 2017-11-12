@@ -30,6 +30,8 @@ scene_object parse_radius_width_height(scene_object obj, char *str);
 
 scene_object parse_color_position_normal(scene_object obj);
 
+int get_num_lines(FILE *fr);
+
 //scene_object ** read_csv_file(FILE *fr);
 void read_csv_file(FILE *fr, scene_object result[]);
 

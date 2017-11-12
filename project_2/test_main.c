@@ -12,6 +12,7 @@ int main(){
 	test_parse_camera();
 	test_parse_sphere();
 	test_parse_plane();
+	test_get_num_lines();
 	test_read_csv_file();
 
 	printf("\n");

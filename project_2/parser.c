@@ -249,6 +249,15 @@ scene_object * parse_plane(char *str) {
 	return obj;
 }
 
+int get_num_lines(FILE *fr){
+	char str[100];
+	int ii = 0;
+	while(fgets(str, 99, fr)){
+		ii++;
+	}
+	return ii;
+}
+
 /*
  *  Given an open CSV file, and an array, it will pull every scene object out of
  *  the data file and put it into the array, which can then be used

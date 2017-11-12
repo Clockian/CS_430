@@ -15,6 +15,8 @@ void test_parse_sphere(void);
 
 void test_parse_plane(void);
 
+void test_get_num_lines(void);
+
 void test_read_csv_file(void);
 
 #endif /* TEST_PARSER_H */

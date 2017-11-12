@@ -162,6 +162,16 @@ void test_parse_plane(void){
 	}
 }
 
+void test_get_num_lines(void){
+	FILE *fr = fopen("input.csv", "r");
+	int result = get_num_lines(fr);
+	if(result == 3){
+		printf("SUCCESS - test_get_num_lines\n");
+	} else{
+		printf("FAILED - test_get_num_lines\n");
+	}
+}
+
 void test_read_csv_file(void){
 	scene_object result[4];
 	FILE *fr = fopen("input.csv", "r");
