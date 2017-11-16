@@ -5,18 +5,18 @@
 void test_write_P6(void){
 	FILE *fh = fopen("output.ppm", "w");
 
-	int WIDTH = 640;
-	int HEIGHT = 480;
+	int WIDTH = 160;
+	int HEIGHT = 120;
 
 	Pixel *pixmap;
 	pixmap = malloc(sizeof(Pixel) * WIDTH * HEIGHT);
 
-	int dx = WIDTH/8;
-	int dy = HEIGHT/8;
+	int dx = WIDTH/2;
+	int dy = HEIGHT/2;
 
 	for(int row = 0; row < HEIGHT; row += 1){
 		for(int col = 0; col < WIDTH; col += 1){
-			if((row/dy + col/dx) % 2){
+			if((row/dy + col/dx) % 2 == 0){
 				pixmap[WIDTH * row + col].r = 255;
 				pixmap[WIDTH * row + col].g = 0;
 				pixmap[WIDTH * row + col].b = 0;

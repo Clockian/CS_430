@@ -168,6 +168,10 @@ void test_plane_intersection(void){
 	double t3 = plane_intersection(Rd3, plane);
 	//printf("here3\n");
 
+	printf("%f\n", t1);
+	printf("%f\n", t2);
+	printf("%f\n", t3);
+
 	if(t1 >= 0.0 &&
 	   t2 == 0.0 &&
 	   t3 == 0.0 ){

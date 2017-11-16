@@ -62,26 +62,48 @@ V3 * normalize_ray(V3 *Rd){
 }
 
 double plane_intersection(V3 *Rd, scene_object obj){
-	double t;
-
-	V3 *Rn = malloc(sizeof(V3));
-	Rn->i = obj.normal[0];
-	Rn->j = obj.normal[1];
-	Rn->z = obj.normal[2];
-
-	V3 *Rp = malloc(sizeof(V3));
-	Rp->i = obj.position[0];
-	Rp->j = obj.position[1];
-	Rp->z = obj.position[2];
-
+	// Origin of camera
 	V3 *Ro = malloc(sizeof(V3));
 	Ro->i = 0;
 	Ro->j = 0;
 	Ro->z = 0;
 
-	double denominator = V3_dot(Rn, Rd);
+	// Normal of plane
+	V3 *Rn = malloc(sizeof(V3));
+	Rn->i = obj.normal[0];
+	Rn->j = obj.normal[1];
+	Rn->z = obj.normal[2];
+	Rn = normalize_ray(Rn);
 
-	if(denominator > 0){
+	// Position of plane
+	V3 *Rp = malloc(sizeof(V3));
+	Rp->i = obj.position[0];
+	Rp->j = obj.position[1];
+	Rp->z = obj.position[2];
+
+	double t;
+
+	double denominator = V3_dot(Rd, Rn);
+
+	if(fabs(denominator) < 0.000001){
+		return 1000000000000; //return infinity
+	}
+
+	// Get a vector of the plane
+	V3 *plane = malloc(sizeof(V3));
+	V3_subtract(plane, Rp, Ro);
+
+	double numerator = V3_dot(Rn, plane);
+
+	t = numerator/denominator;
+
+	if(t < 0){
+		return 1000000000000;
+	}
+
+	return t;
+
+	/*if(denominator > 0){
 		//normal times (point on plane minus ray origin)
 		// (point on plane minus ray origin)
 		V3 *plane = malloc(sizeof(V3));
@@ -95,11 +117,15 @@ double plane_intersection(V3 *Rd, scene_object obj){
 			return t;
 		}
 	}
-	return 0;
+	return 0;*/
 }
 
 double sphere_intersection(V3 *Rd, scene_object obj){
 	//printf("Rd = %f, %f, %f\n", Rd->i, Rd->j, Rd->z);
+	V3 *Ro = malloc(sizeof(V3));
+	Ro->i = 0.0;
+	Ro->j = 0.0;
+	Ro->z = 0.0;
 
 	double A = (Rd->i * Rd->i) + (Rd->j * Rd->j) + (Rd->z * Rd->z);
 	//double B = 2 * (Rd->i * (0 - obj.position[0]) + 
@@ -108,6 +134,7 @@ double sphere_intersection(V3 *Rd, scene_object obj){
 	double B = (2 * Rd->i * (0 - obj.position[0]) + 
 		        2 * Rd->j * (0 - obj.position[1]) + 
 		        2 * Rd->z * (0 - obj.position[2]));
+	//double B = 2 * V3_dot(Rd, Ro);
 	double C = ((Rd->i - obj.position[0]) * (Rd->i - obj.position[0]) +
 	            (Rd->j - obj.position[1]) * (Rd->j - obj.position[1]) +
 	            (Rd->z - obj.position[2]) * (Rd->z - obj.position[2]) -
@@ -151,9 +178,10 @@ Pixel * raycast(V3 *Rd, scene_object objects[], int obj_count){//Ro, Rd){
 	int closest_t = 1000; //infinity, set to very large number
 	double t;
 	double t_store[obj_count];
+	scene_object obj;
 	// while loop might be better
-	for(int i = 0; i < obj_count; i += 1){
-		scene_object obj = objects[i];
+	for(int i = 0; i < obj_count; i++){
+		obj = objects[i];
 
 		// Test for what kind of object it is
 		//double t = intersection(Ro, Rd, obj);
@@ -168,10 +196,10 @@ Pixel * raycast(V3 *Rd, scene_object objects[], int obj_count){//Ro, Rd){
 		}
 
 		// Closest_obj == null?
-		if(t < closest_t){
-			closest_t = t;
+		//if(t < closest_t){
+		//	closest_t = t;
 			closest_obj = obj;
-		}
+		//}
 	}
 
 	Pixel *color = malloc(sizeof(Pixel));
@@ -196,8 +224,8 @@ Pixel * render(int width, int height, scene_object objects[], int obj_count){
 	Pixel *pixmap = malloc(sizeof(Pixel) * width * height);
 	Pixel *color;
 
-	for(int i = 0; i < width; i++){  // i from the Pij
-		for(int j = 0; j < height; j++){
+	for(int i = 0; i < height; i++){  // i from the Pij
+		for(int j = 0; j < width; j++){
 
 			Pijz = construct_V3_i_j_z(i, j, width, height);
 
@@ -207,11 +235,14 @@ Pixel * render(int width, int height, scene_object objects[], int obj_count){
 
 			// Cast the ray
 			color = raycast(Rd, objects, obj_count);
-			pixmap[i + j].r = color->r;
-			pixmap[i + j].g = color->g;
-			pixmap[i + j].b = color->b;
-
-			return pixmap;
+			
+			pixmap[(width * i) + j].r = color->r;
+			pixmap[(width * i) + j].g = color->g;
+			pixmap[(width * i) + j].b = color->b;
+			
+			//pixmap[(width * i) + j].r = 0;//color->r;
+			//pixmap[(width * i) + j].g = 255;//color->g;
+			//pixmap[(width * i) + j].b = 255;//color->b
 
 			// Colors in ray tracers go from 0-1, RGB is 1-255, need conversion
 			//pixels[...] = color.red;
@@ -219,4 +250,5 @@ Pixel * render(int width, int height, scene_object objects[], int obj_count){
 			//pixels[...] = color.blue;
 		}
 	}
+	return pixmap;
 }
