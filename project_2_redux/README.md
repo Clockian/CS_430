@@ -27,42 +27,30 @@ To compile the raycast program, enter the following into the terminal to run the
 <pre><code>make</code></pre>
 
 
-To generate the test enviroment for this program, enter the following into the terminal to compile the test code
+To generate the test enviroment for this program, enter the following into the terminal to compile the test code. 
 
-<pre><code>make test</code></pre>
+This will also automatically run the program with the following parameters
 
-The test code can be ran with the following argument in the terminal
+<pre><code>./raycast 80 60 input.csv raycast_output.ppm</code></pre>
+
+This is for testing purposes, so I didn't have to type that command in repeatedly.
+
+<pre><code>make -B test</code></pre>
+
+The test code can be ran with the following argument in the terminal, which will also run the tests with this command.
 
 <pre><code>./test</code></pre>
+
+This command can also be used separatly to run the tests.
 
 The test code is primarily unit tests on the functions to ensure they work. They do not test for incorrect input or program misusage as of yet.
 
 <b>Known Issues</b>
 
-The following are unresolved issues with the program
+Camera width and height is being loaded into raycast.c improperly. Temporarily rectified with constants
 
-+ Raycast.c incomplete, doesn't produce the image of the scene
+Closest t calculation bugged, so sphere appears behind plane
 
-Raycast.c has implemented the obtaining of Rd and normalizing it, but the intersection test and obtaining the color data has yet to be implemented.
+Didn't implement lighting or raytracing in any way, shape or form.
 
 This project will be updated on the Github until it is completed
-
-<b>Description of Files</b>
-+ raytracer.c - Main program file
-+ raycast.c - Has functions necessary for the for the raycasting.
-+ parser.c - Converts each line from a compatible .csv file into a struct containing the data for the file, and those structs are stored in an array, which is used by the main program file
-+ writer.c - Writes a given file to disk as a P6 .ppm
-+ raycast.h - Defines the struct for a vector, misnamed as pixel
-+ parser.h - Defines the struct the data uses
-+ writer.h - Defines the struct for the color of a pixel, named Pixel
-+ README.md - Readme file describing the project
-+ makefile - Interpets the two different compilation methods for the program
-+ makefile.raytracer - Specifies the compilation for the raycaster
-+ makefile.test - Specifies the compilation for the test
-+ input.csv - The example .csv input provided with the project
-
-
-+ test_main.c - The main file that runs all of the tests. Tests simply produce a print statement stating pass or fail
-+ test_raycast.c - The unit tests for the raycaster
-+ test_parser.c - The unit tests for the parser
-+ test_writer.c - The unit test for the writer, produces checkerboard image that needs to be checked visually
