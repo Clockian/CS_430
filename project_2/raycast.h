@@ -13,7 +13,7 @@ double construct_aspect_ratio(int width, int height);
 
 double construct_V3_i(int i, int width, int height);
 
-double construct_V3_j(int j, int height);
+double construct_V3_j(int j, int width, int height);
 
 double construct_V3_z(void);
 
@@ -26,6 +26,8 @@ V3 * normalize_ray(V3 *Rd);
 double plane_intersection(V3 *Rd, scene_object obj);
 
 double sphere_intersection(V3 *Rd, scene_object obj);
+
+double intersect(V3 *Rd, scene_object obj);
 
 Pixel * raycast(V3 *Rd, scene_object objects[], int obj_count);
 

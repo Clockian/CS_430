@@ -41,10 +41,10 @@ void test_construct_V3_i(void){
 }
 
 void test_construct_V3_j(void){
-	double Pj1 = construct_V3_j(0, 480);
-	double Pj2 = construct_V3_j(1, 480);
-	double Pj3 = construct_V3_j(240, 480);
-	double Pj4 = construct_V3_j(479, 480);
+	double Pj1 = construct_V3_j(0, 640, 480);
+	double Pj2 = construct_V3_j(1, 640, 480);
+	double Pj3 = construct_V3_j(240, 640, 480);
+	double Pj4 = construct_V3_j(479, 640, 480);
 
 	if(Pj1 == 1 &&
 	   Pj2 >= 0.995833 &&

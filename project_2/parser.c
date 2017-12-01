@@ -270,6 +270,7 @@ void read_csv_file(FILE *fr, scene_object result[]) {
 	while(fgets(str, 99, fr)){
 		char *cleaned_str = remove_brackets_whitespace(str);
 		obj = determine_type(cleaned_str);
+
 		result[ii] = *obj;
 		ii++;
 	}

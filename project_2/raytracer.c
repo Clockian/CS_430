@@ -26,9 +26,11 @@ int main(int argc, char *argv[]){
 
 	int num_objs = get_num_lines(fr);
 
-	scene_object result[num_objs];
+	scene_object result[num_objs];  // num_objs
 
-	read_csv_file(fr, result);
+	FILE *fr2 = fopen(argv[3], "r");
+
+	read_csv_file(fr2, result);
 
 	Pixel *pixmap = render(WIDTH, HEIGHT, result, num_objs);
 
